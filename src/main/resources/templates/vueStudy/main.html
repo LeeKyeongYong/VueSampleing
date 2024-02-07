@@ -3,6 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>뷰 메인</title>
+    <script>
+        function Count1__updateDisplay(){
+            fetc('/count1')
+                .then(response => response.json())
+                .then(json => {
+                    document.querySelector('.count-1-display').indexHTML = json.data;
+                });
+        }
+
+        function Count2__updateDisplay(){
+            fetc('/count2')
+                .then(response => response.json())
+                .then(json => {
+                    document.querySelector('.count-2-display').indexHTML = json.data;
+                });
+        }
+    </script>
     <style>
         .box {
             width: 500px;
@@ -20,11 +37,15 @@
 
         메인1 <br/>
         <hr/>
-        공간1 <div class="box">
+        공간1
+        <button onclick="Count1__updateDisplay();"></button>
+        <div class="box count-1-display">
             <th:block th:text="${count1}"></th:block>
         </div>
-        공간2 <div class="box">
-                <th:block th:text="${count2}"></th:block>
-            </div>
+        공간2
+        <button onclick="Count2__updateDisplay();"></button>
+        <div class="box  count-2-display">
+           <th:block th:text="${count2}"></th:block>
+        </div>
 </body>
 </html>
