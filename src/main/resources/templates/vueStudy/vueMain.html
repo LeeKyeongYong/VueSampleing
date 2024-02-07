@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>뷰 메인</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <style>
+    .box {
+      width: 500px;
+      height: 500px;
+      border: 2px solid red;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+      flex-direction: column;
+    }
+  </style>
+</head>
+<body>
+  메인입니다.<br/>
+
+  메인1 <br/>
+  <hr/>
+  공간1 (자동갱신)
+  <button onclick="Count1__updateDisplay();">클릭 count1</button>
+  <div class="box count-1-display">
+    <span style="color:blue">{{ count }}</span>
+    <span style="color:green">{{ count+1 }}</span>
+    <span style="color:black">{{ count+2 }}</span>
+    <span style="color:pink">{{ count+3 }}</span>
+  </div>
+  <script>
+    const {createApp} = Vue
+    const box1 = createApp({
+      data(){
+        return {
+          count: 55
+        }
+      }
+    }).mount('.count-1-display');
+  </script>
+  <script>
+    function Count1__updateDisplay(){
+      fetch('/count1')
+              .then(response => response.json())
+              .then(json => {
+                box1.count = json.data;
+              });
+    }
+    Count1__updateDisplay();
+    function Count2__updateDisplay(){
+      fetch('/count2')
+              .then(response => response.json())
+              .then(json => {
+                document.querySelector('.count-2-display').indexHTML = json.data;
+              });
+    }
+
+  </script>
+  공간2 (버튼클릭)
+  <button onclick="Count2__updateDisplay();">클릭 count2</button>
+  <div class="box count-2-display">
+    <th:block th:text="${count2}"></th:block>
+  </div>
+</body>
+</html>

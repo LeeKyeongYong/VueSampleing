@@ -19,7 +19,8 @@ public class HomeController {
         model.addAttribute("count1",count1);
         model.addAttribute("count2",count2);
 
-        return "vueStudy/main";
+        //return "vueStudy/main";
+        return "vueStudy/vueMain";
     }
     @GetMapping("/count1")
     @ResponseBody
