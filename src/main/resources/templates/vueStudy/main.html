@@ -8,7 +8,12 @@
             fetc('/count1')
                 .then(response => response.json())
                 .then(json => {
-                    document.querySelector('.count-1-display').indexHTML = json.data;
+                    document.querySelector('.count-1-display').indexHTML = `
+                        <span style="color:blue" th:text="${data.json}"></span>
+                        <span style="color:blue" th:text="${data.json + 1}"></span>
+                        <span style="color:blue" th:text="${data.json + 2}"></span>
+                        <span style="color:blue" th:text="${data.json + 3}"></span>
+                    `;
                 });
             // 1초뒤에 해당 함수가 재 실행 되도록 예약
             // 주기적으로 실행한다.
@@ -23,6 +28,8 @@
                     document.querySelector('.count-2-display').indexHTML = json.data;
                 });
         }
+
+        Count1__updateDisplay();
     </script>
     <style>
         .box {
@@ -32,7 +39,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 10rem;
+            font-size: 2rem;
+            flex-direction: column;
         }
     </style>
 </head>
@@ -44,7 +52,10 @@
         공간1 (자동갱신)
         <button onclick="Count1__updateDisplay();">클릭 count1</button>
         <div class="box count-1-display">
-            <th:block th:text="${count1}"></th:block>
+            <span style="color:blue" th:text="${count1}"></span>
+            <span style="color:blue" th:text="${count1 + 1}"></span>
+            <span style="color:blue" th:text="${count1 + 2}"></span>
+            <span style="color:blue" th:text="${count1 + 3}"></span>
         </div>
         공간2 (버튼클릭)
         <button onclick="Count2__updateDisplay();">클릭 count2</button>
