@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>뷰 메인</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+  <button onclick="addPerson('홍길숙');">맨처음</button>
+  <div class="box-1">
+    <ul>
+      <li v-for="person in people">번호: {{person.id}} , 이름: {{person.name}}</li>
+    </ul>
+    <hr/>
+    <div>현재 선택된 회원</div>
+    <div>
+      <button @click="prevPerson">좌</button>
+      <button @click="nextPerson">우</button>
+    </div>
+    <div v-for="person in currentPeople"> 번호: {{person.id}} , 이름 : {{person.name}} </div>
+  </div>
+  <script>
+      const { reactive,ref,createApp,computed} = Vue;
+      const box1VueApp_people = ref([
+        {id:1,name:"Paul"},
+        {id:2,name:"Alice"},
+        {id:3,name:"Jim"},
+        { id: 4, name: "홍길동" },
+        { id: 5, name: "John" },
+        { id: 6, name: "Jane" }
+      ]);
+      const box1VueApp = createApp({
+          setup(){
+            const people = box1VueApp_people;
+            const peopleIndexState = reactive({index:0});
+
+            const pageItemsCount = 3;
+
+              function prevPerson(){
+                if(peopleIndexState.index>0){
+
+                  peopleIndexState.index-=pageItemsCount;
+
+                } else {
+                   alert("첫번째 입니다.");
+                }
+              }
+
+              function nextPerson(){
+                if(peopleIndexState.index<people.value.length-1){
+
+                  peopleIndexState.index+=pageItemsCount;
+
+                } else{
+
+                  alert("가장 마지막입니다. 입니다.");
+
+                }
+              }
+
+              const currentPeople = computed(()=>{
+                  const startIndex = peopleIndexState.index;
+                  return  people.value.slice(startIndex,startIndex+pageItemsCount);
+              });
+
+              //Exposing people and currentPerson to the template
+              return{people,currentPeople,prevPerson,nextPerson};
+          }
+      }).mount(".box-1");
+      function addPerson(name){
+        const id = box1VueApp_people.value.length+1;
+        box1VueApp_people.value.push({
+          id,
+          name
+        });
+      }
+  </script>
+</body>
+</html>

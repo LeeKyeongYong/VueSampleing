@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>뷰 메인</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+
+<button onclick="addPerson('홍길동');">데이터 추가</button>
+
+<div class="box-1">
+  <ul>
+    <li v-for="person in people">번호 : {{person.id}}, 이름 : {{person.name}}</li>
+  </ul>
+</div>
+  <script>
+    const { createApp } = Vue;
+    const box1VueApp = createApp({
+      data(){
+        return {
+            people:[]
+        }
+      }
+    }).mount('.box-1');
+
+    const people = [
+      { id: 1, name: "Paul" },
+      { id: 2, name: "Alice" },
+      { id: 3, name: "Jim" }
+    ];
+
+    box1VueApp.people = people;
+
+    function addPerson(name) {
+      const id = people.length + 1;
+
+      box1VueApp.people.push({
+        id,
+        name
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>뷰 메인</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <style>
+    .box {
+      width: 500px;
+      height: 500px;
+      border: 2px solid red;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+      flex-direction: column;
+    }
+  </style>
+</head>
+<body>
+  <button onclick="addPerson('홍길자');">클릭 count1</button>
+  <div class="box-1">
+      <ul>
+        <li v-for="person in people">번호 : {{person.id}}, 이름 : {{person.name}}</li>
+      </ul>
+
+      <hr>
+
+      <div>현재 선택된 회원</div>
+
+      <div>번호 : {{currentPerson.id}}, 이름 : {{currentPerson.name}}</div>
+  </div>
+  <script>
+    const {createApp,ref,computed} = Vue;
+    const box1VueApp_people = ref([
+    { id: 1, name: "Paul" },
+    { id: 2, name: "Alice" },
+    { id: 3, name: "Jim" }
+    ]);
+
+    const box1VueApp = createApp({
+      setup() {
+        const people = box1VueApp_people;
+        const currentPerson = computed(()=>people.value[0]||null);
+        //Exposing people and currentPerson to the template
+        return {currentPerson,people};
+      }
+    }).mount(".box-1");
+
+    function addPerson(name){
+      const id = box1VueApp_people.value.length+1;
+
+      box1VueApp_people.value.push({
+        id,
+        name
+      });
+    }
+  </script>
+</body>
+</html>

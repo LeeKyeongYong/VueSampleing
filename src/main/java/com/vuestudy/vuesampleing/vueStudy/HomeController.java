@@ -22,6 +22,10 @@ public class HomeController {
         //return "vueStudy/main";
         return "vueStudy/vueMain";
     }
+    @GetMapping("/vueMain2")
+    public String showVueMain2(Model model){
+        return "vueStudy/vueMain2";
+    }
     @GetMapping("/count1")
     @ResponseBody
     public RsData<Integer> getCount1(Model model){
@@ -44,5 +48,29 @@ public class HomeController {
     @ResponseBody
     public RsData<Integer> increaseCount2(Model model){
         return new RsData<>("S-1","count2 increased",++count2);
+    }
+
+    @GetMapping("/vueMain3")
+    public String showVueMain3(Model model){
+        return "vueStudy/vueMain3";
+    }
+
+    @GetMapping("/vueMain4")
+    public String showVueMain4(Model model){
+        return "vueStudy/vueMain4";
+    }
+    @GetMapping("/vueMain5")
+    public String showVueMain5(Model model){
+        return "vueStudy/vueMain5";
+    }
+
+    @GetMapping("/vueMain6")
+    public String showVueMain6(Model model){
+        return "vueStudy/vueMain6";
+    }
+
+    @GetMapping("/vueMain7")
+    public String showVueMain7(Model model){
+        return "vueStudy/vueMain7";
     }
 }
