@@ -10,6 +10,10 @@
                 .then(json => {
                     document.querySelector('.count-1-display').indexHTML = json.data;
                 });
+            // 1초뒤에 해당 함수가 재 실행 되도록 예약
+            // 주기적으로 실행한다.
+            // 네이버 실시간 검색이 이런식으로 진행되었다.
+            setTimeout(Count1__updateDisplay,10000);
         }
 
         function Count2__updateDisplay(){
@@ -37,13 +41,13 @@
 
         메인1 <br/>
         <hr/>
-        공간1
-        <button onclick="Count1__updateDisplay();"></button>
+        공간1 (자동갱신)
+        <button onclick="Count1__updateDisplay();">클릭 count1</button>
         <div class="box count-1-display">
             <th:block th:text="${count1}"></th:block>
         </div>
-        공간2
-        <button onclick="Count2__updateDisplay();"></button>
+        공간2 (버튼클릭)
+        <button onclick="Count2__updateDisplay();">클릭 count2</button>
         <div class="box  count-2-display">
            <th:block th:text="${count2}"></th:block>
         </div>
