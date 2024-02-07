@@ -5,15 +5,17 @@
     <title>뷰 메인</title>
     <script>
         function Count1__updateDisplay(){
-            fetc('/count1')
+            fetch('/count1')
                 .then(response => response.json())
                 .then(json => {
-                    document.querySelector('.count-1-display').indexHTML = `
-                        <span style="color:blue" th:text="${data.json}"></span>
-                        <span style="color:blue" th:text="${data.json + 1}"></span>
-                        <span style="color:blue" th:text="${data.json + 2}"></span>
-                        <span style="color:blue" th:text="${data.json + 3}"></span>
-                    `;
+                    const display = document.querySelector('.count-1-display');
+
+                    //$(display).find('.count-1-display__part-1').html(json.data);
+                    display.querySelector('.count-1-display__part-1').innerHTML=json.data;
+                    display.querySelector('.count-1-display__part-2').innerHTML=json.data+1;
+                    display.querySelector('.count-1-display__part-3').innerHTML=json.data+2;
+                    display.querySelector('.count-1-display__part-4').innerHTML=json.data+3;
+
                 });
             // 1초뒤에 해당 함수가 재 실행 되도록 예약
             // 주기적으로 실행한다.
@@ -22,7 +24,7 @@
         }
 
         function Count2__updateDisplay(){
-            fetc('/count2')
+            fetch('/count2')
                 .then(response => response.json())
                 .then(json => {
                     document.querySelector('.count-2-display').indexHTML = json.data;
@@ -52,10 +54,10 @@
         공간1 (자동갱신)
         <button onclick="Count1__updateDisplay();">클릭 count1</button>
         <div class="box count-1-display">
-            <span style="color:blue" th:text="${count1}"></span>
-            <span style="color:blue" th:text="${count1 + 1}"></span>
-            <span style="color:blue" th:text="${count1 + 2}"></span>
-            <span style="color:blue" th:text="${count1 + 3}"></span>
+            <span class="count-1-display__part-1" style="color:blue"></span>
+            <span class="count-1-display__part-2" style="color:green"></span>
+            <span class="count-1-display__part-3" style="color:black"></span>
+            <span class="count-1-display__part-4" style="color:pink"></span>
         </div>
         공간2 (버튼클릭)
         <button onclick="Count2__updateDisplay();">클릭 count2</button>
