@@ -3,15 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>뷰 메인</title>
+    <style>
+        .box {
+            width: 500px;
+            height: 500px;
+            border: 2px solid red;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 10rem;
+        }
+    </style>
 </head>
 <body>
         메인입니다.<br/>
 
         메인1 <br/>
         <hr/>
-        공간1 <div style="width:500px; height:500px; border:2px solid red;"></div>
-        공간2 <div style="width:500px; height:500px; border:2px solid blue;">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur doloremque ducimus fugiat sit. Amet blanditiis consequatur, culpa illum iste iusto quam sapiente totam ullam veritatis. Beatae quam recusandae suscipit velit.
+        공간1 <div class="box">
+            <th:block th:text="${count1}"></th:block>
         </div>
+        공간2 <div class="box">
+                <th:block th:text="${count2}"></th:block>
+            </div>
 </body>
 </html>
